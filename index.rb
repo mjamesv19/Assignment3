@@ -3,14 +3,22 @@ $prompt = TTY::Prompt.new
 
 #setting up the home menu
 def home_menu
-    return $prompt.select("what would you like to manage",
+    return $prompt.select("welcome to the home menu, what would you like to manage? ",
     ["Accounts","Income","Expenses","Goals","Transfer","Exit"])
 end
 def accounts_menu
-    return $prompt.select("what would you like to manage",
+    return $prompt.select("welcome to the accounts menu, what would you like to do? ",
     ["View accounts","Create accounts","delete accounts","Goals","Go Back"])
 end
 
+def income_menu
+    return $prompt.select("welcome to the income menu, what would you like to do? ",
+    ["View income sources", "add new income source", "remove income source", "Add current income sources to connected acounts", "Go Back" ])
+end
+def expenses_menu
+    return $prompt.select("welcome to the expenses menu, what would you like to do? ",
+    ["View expenses list", "add new expense", "remove expense from list", "deduct current expenses from to connected acounts", "Go Back" ])
+end
 
 answer = ""
 while answer != "Exit"
@@ -18,26 +26,18 @@ while answer != "Exit"
     case answer
     when "Accounts"
         answer2 = ""
-        while answer != "Exit"
-            case answer
-    when "Accounts"
-        puts "Wellcome to the accounts menu."
-        puts "what would you like to do?"
-        answer2 = ""
         while answer2 != "Go Back"
             answer2 = accounts_menu
             case
-            when "View accounts"    
+            when "View accounts"
             when "Create accounts"
-            when "delete accounts"
+            when "Delete accounts"
             when "Goals"
             when "Go Back" 
             end     
         end
         answer = home_menu
     when "Income"
-        puts "Wellcome to the accounts menu."
-        puts "what would you like to do?"
         answer2 = ""
         while answer2 != "Go Back"
             answer2 = income_menu
@@ -51,24 +51,23 @@ while answer != "Exit"
         end
         answer = home_menu
     when "Expenses"
-        puts "3"
+        answer2 = ""
+        while answer2 != "Go Back"
+            answer2 = expenses_menu
+            case
+            when "View expenses list"    
+            when "add new expense"
+            when "remove expense from list"
+            when "deduct current expenses from to connected acounts"
+            when "Go Back" 
+            end     
+        end
     when "Goals"
-        puts "4"
+        puts "show goals"
     when "Transfer"
         puts "5"
     when "Exit"
         "bye"
     end
-        end 
-    when "Income"
-        puts "2"
-    when "Expenses"
-        puts "3"
-    when "Goals"
-        puts "4"
-    when "Transfer"
-        puts "5"
-    when "Exit"
-        "bye"
-    end
+    
 end
