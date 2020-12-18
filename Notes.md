@@ -6,21 +6,23 @@ watch lecture from week 7
 
 # Features 
 ## Accounts
-- look at the different accounts
-- add
+- look at all the accounts
+- create new accounts
+- delete accounts
 
 ## Income
 - list source of income and add it to an account
-- check date and add income every wednesday(or day selected by user)
-- options for money to be add monthly or fortnightly 
+- add new sources of income
+- remove sources of income
+- add funds to accounts
 
 ## Expenditure
-- Tax
-- weekly food shopping
-- one off expenses
+- view list of expences 
+- add expences to list
+- remove expences from list
+- deduct funds from accounts
 
 ## Goal
-- amount you are aiming for
-- how much money do you have
-- rate at which you get more money
-- how long to reach goal
+- set a goal for an account
+- enter your average income expenses 
+- return number of weeks/months/years to reach goal.

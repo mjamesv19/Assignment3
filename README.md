@@ -48,7 +48,7 @@ Develop a diagram which describes the control flow of your application. Your dia
 - show the workflow/logic and/or integration of the features in your application for each feature.
 - utilise a recognised format or set of conventions for a control flow diagram, such as UML. -->
 
-Accounw
+Account
  - create
  - view 
  - delete 
@@ -98,7 +98,7 @@ Expenses - 2 hours
 Goal - 2 hours
 take amount in account add income and duct expences until a goal is reached, return the number of times this was done to determine how long it will take to reach the goal
 
-Transfer - 1 hour
+Transfer -  1 hour
 take founds from one account and add the same amount to another 
 
 # help documentation
