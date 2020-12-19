@@ -39,26 +39,58 @@ end
 def delete_account
 end
 def view_account(array)#local var for method
-    puts "___________________"
+    list_of_account_names = []
     array.each do |account| 
-        puts account.name
+        list_of_account_names << account.name
     end
-    puts "___________________"
+    return list_of_account_names
 end
 
 #income methods
-def (array)# select account to add income to
-    #response = tty
-    response = "savings1"
+def view_income_list(array)
+    array.each  do |account|
+        puts "    #{account.name} receives income from #{account.income_hash}."
+    end
+end
+def create_new_income(array)# select account to add income to
+    response = $prompt.select("which account would you like to attach an income to?", view_account(array))
     array.each do |account|
-        if array.name = response
-            array.
-
-    #response.income_hash
+        if account.name == response
+            source_name = $prompt.ask("What is the name of the provider of this of income? ")
+            amount = $prompt.ask("How much money is added to the account from this source? (must enter whole number, doesn't accept sense): ")
+            #checking if input is valid
+            if amount.to_i.to_s == amount
+                amount = amount.to_i
+                account.income_hash[source_name] = amount
+                puts "    $#{amount}, payed by #{source_name}, has been added to the income list for #{account.name} account."
+            else
+                puts "You have provided invalid answer please try again and follow the prompts. "
+            end
+        end
+    end
 end
-def # add to income hash
-
+def remove_income_from_list(array)
+    response = $prompt.select("which account would you like to remove an income source from?",view_account(array))
+    array.each do |account|
+        if account.name == response
+            if account.income_hash != {} #this loop prevents an empty hash from being selected to avoid an error
+                keys_array = account.income_hash.keys
+                puts keys_array
+                source_name = $prompt.select("which source do you want to delete?", keys_array)
+                puts "    #{source_name} is being deleted from list"
+                account.income_hash.delete(source_name)
+                puts 
+            else
+                puts "    ***This account has no income to remove***"
+            end
+            
+        end
+    end 
 end
+
+# def # add to income hash
+
+# end
 
 # testing
 # puts account_array
@@ -84,7 +116,7 @@ while answer != "Exit"
             answer2 = accounts_menu
             case answer2
             when "View accounts"
-                view_account(account_array)
+                puts view_account(account_array)
             when "Create accounts"
                 puts "feature not available yet "
             when "Delete accounts"
@@ -99,10 +131,13 @@ while answer != "Exit"
             answer2 = income_menu
             case answer2
             when "View income sources"
+                view_income_list(account_array)
                 
             when "Add new income source"
+                create_new_income(account_array)
 
             when "Remove income source"
+                remove_income_from_list(account_array)
             when "Add current income sources to connected acounts"
             when "Go Back" 
             end     
