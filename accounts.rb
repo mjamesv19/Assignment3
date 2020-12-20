@@ -13,6 +13,7 @@ class Account
     def initialize(name, funds)
         # income_hash = {}
         # expense_hash = {}
+        
 
         @name = name
         @funds = funds.to_i

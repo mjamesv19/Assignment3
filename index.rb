@@ -11,16 +11,16 @@ def home_menu
 end
 def accounts_menu
     return $prompt.select("welcome to the accounts menu, what would you like to do? ",
-    ["View accounts","Create accounts","delete accounts","Goals","Go Back"])
+    ["View accounts","Create accounts","delete accounts","Go Back"])
 end
 
 def income_menu
     return $prompt.select("welcome to the income menu, what would you like to do? ",
-    ["View income sources", "Add new income source", "Remove income source", "Add current income sources to connected acounts", "Go Back" ])
+    ["View income sources", "Add new income source", "Remove income source", "Add current income sources to connected accounts", "Go Back" ])
 end
 def expenses_menu
     return $prompt.select("welcome to the expenses menu, what would you like to do? ",
-    ["View expenses list", "Add new expense", "Remove expense from list", "Deduct current expenses from to connected acounts", "Go Back" ])
+    ["View expenses list", "Add new expense", "Remove expense from list", "Deduct current expenses from to connected accounts", "Go Back" ])
 end
 
 #making accounts
@@ -38,12 +38,18 @@ def create_new_account
 end
 def delete_account
 end
-def view_account(array)#local var for method
+def view_account(array, option)#local var for method
     list_of_account_names = []
+    list_of_account_names_hash = {}
     array.each do |account| 
-        list_of_account_names << account.name
+        list_of_account_names << account.name # used in another method
+        list_of_account_names_hash[account.name] = account.funds
     end
-    return list_of_account_names
+    if option == "array"
+        return list_of_account_names
+    else 
+        return list_of_account_names_hash
+    end
 end
 
 #income methods
@@ -53,7 +59,7 @@ def view_income_list(array)
     end
 end
 def create_new_income(array)# select account to add income to
-    response = $prompt.select("which account would you like to attach an income to?", view_account(array))
+    response = $prompt.select("which account would you like to attach an income to?", view_account(array, "array"))
     array.each do |account|
         if account.name == response
             source_name = $prompt.ask("What is the name of the provider of this of income? ")
@@ -70,12 +76,12 @@ def create_new_income(array)# select account to add income to
     end
 end
 def remove_income_from_list(array)
-    response = $prompt.select("which account would you like to remove an income source from?",view_account(array))
+    response = $prompt.select("which account would you like to remove an income source from?",view_account(array, "array"))
     array.each do |account|
         if account.name == response
             if account.income_hash != {} #this loop prevents an empty hash from being selected to avoid an error
                 keys_array = account.income_hash.keys
-                puts keys_array
+                # puts keys_array
                 source_name = $prompt.select("which source do you want to delete?", keys_array)
                 puts "    #{source_name} is being deleted from list"
                 account.income_hash.delete(source_name)
@@ -86,6 +92,16 @@ def remove_income_from_list(array)
             
         end
     end 
+end
+def add_income_on_list_to_accounts(array)
+    $prompt.ask("adding income to accounts, press enter to continue")
+    money_to_be_added_array = []
+    array.each do |account|
+        account.income_hash.each_value do |value|
+            account.funds += value 
+        end
+    end
+
 end
 
 # def # add to income hash
@@ -116,12 +132,11 @@ while answer != "Exit"
             answer2 = accounts_menu
             case answer2
             when "View accounts"
-                puts view_account(account_array)
+                puts view_account(account_array, "hash")
             when "Create accounts"
                 puts "feature not available yet "
             when "Delete accounts"
                 puts "feature not available yet "
-            when "Goals"
             when "Go Back" 
             end     
         end
@@ -138,7 +153,8 @@ while answer != "Exit"
 
             when "Remove income source"
                 remove_income_from_list(account_array)
-            when "Add current income sources to connected acounts"
+            when "Add current income sources to connected accounts"
+                add_income_on_list_to_accounts(account_array)
             when "Go Back" 
             end     
         end
@@ -151,13 +167,10 @@ while answer != "Exit"
             when "View expenses list"
             when "Add new expense"
             when "Remove expense from list"
-            when "Deduct current expenses from to connected acounts"
+            when "Deduct current expenses from to connected accounts"
             when "Go Back" 
             end     
         end
-        # 
-        ["View expenses list", "add new expense", "remove expense from list", "deduct current expenses from to connected acounts", "Go Back" ]
-        # 
     when "Goals"
         puts "show goals"
     when "Transfer"
