@@ -102,3 +102,22 @@ Transfer -  1 hour
 take founds from one account and add the same amount to another 
 
 # help documentation
+Design help documentation which includes a set of instructions which accurately describe how to use and install the application.
+
+## steps to install the application
+download app of git hub from [here](https://github.com/mjamesv19/Assignment3)
+
+install gem "colorize", "~> 0.8.1" and gem "tty-prompt", "~> 0.23.0"
+in the terminal type "gem install colorize" without quotations.
+then type "gem install tty-prompt" without quotations.
+
+once the program is downloaded run it with "ruby index.rb" without quotations.
+
+# Future of the app.
+Currently several improvements could be made to the app, given more time i would like to develop several features to make them more user friendly and to add more functions.
+
+The app does achieve my original goal of helping manage finance and calculating the time to reach a goal based of income and expenses. However it doesn't function as a diary because it doesn't save the users data.
+
+2 features that haven't been implemented yet are the create/delete accounts and transfer money features.
+The user can't create new accounts but is given 6 pre named accounts to work with.
+While the transfer money feature isn't working the user can still 

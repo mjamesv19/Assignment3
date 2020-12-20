@@ -25,12 +25,12 @@ end
 
 #making accounts
 account_array = []
-account_array << savings1 = Account.new("Short_savings", "100")
-account_array << savings2 = Account.new("Long_savings", "1000")
-account_array << savings3 = Account.new("Emergency money", "500")
-account_array << spending1 = Account.new("Card1","100")
-account_array << spending2 = Account.new("Card2","30")
-account_array << spending3 = Account.new("Card3","5")
+account_array << savings1 = Account.new("Short_savings", "0")
+account_array << savings2 = Account.new("Long_savings", "0")
+account_array << savings3 = Account.new("Emergency money", "0")
+account_array << spending1 = Account.new("Card1","0")
+account_array << spending2 = Account.new("Card2","0")
+account_array << spending3 = Account.new("Card3","0")
 
 #methods
 accounts_list = []
@@ -193,7 +193,29 @@ def how_long_to_goal(array)
         end
     end
 end
-
+#transfer 
+def transfer(array)
+    money_out = $prompt.select("which account would you like to move money out of? ", view_account(array, "array"))
+    money_in = $prompt.select("which account would you like to move money in to? ", view_account(array, "array"))
+    money_amount = $prompt.ask("how much money are you moving? (whole number please) ")
+    if money_amount.to_i.to_s != money_amount
+        puts "invalid amount please try again"
+        
+    else 
+        money_amount = money_amount.to_i
+        array.each do |account|
+            if account.name == money_out
+                account.funds -= money_amount
+            end
+        end
+        array.each do |account|
+            if account.name == money_in
+                account.funds += money_amount
+            end
+        end
+        puts view_account(array, "hash")
+    end
+end
 answer = ""
 while answer != "Exit"
     answer = home_menu
@@ -250,7 +272,7 @@ while answer != "Exit"
     when "Goals"
         how_long_to_goal(account_array)
     when "Transfer"
-        puts "feature coming soon"
+        transfer(account_array)
     when "Exit"
     end
     
